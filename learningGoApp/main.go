@@ -9,14 +9,12 @@ import (
 	"./calculator"
 )
 
-var num1 string
-var num2 string
-
 func GetNums() (num1, num2) {
-
+	var num1 string
 	fmt.Print("Input the first number: ")
 	fmt.Scanln(&num1)
 
+	var num2 string
 	fmt.Print("Input the second number: ")
 	fmt.Scanln(&num2)
 }
