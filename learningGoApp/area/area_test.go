@@ -25,7 +25,7 @@ var _ = Describe("Area", func() {
 
 	Describe("Testing Areas.", func() {
 		Context("calculating Area of Circle with radius of 3.", func() {
-			It("Area of a circle with radius 1 should be 3.14 ", func() {
+			It("(Area of a circle with radius 1) will be 3.14 ", func() {
 				Expect(calculator.Sum(num1, num2)).To(Equal((int32(10))))
 			})
 		})
