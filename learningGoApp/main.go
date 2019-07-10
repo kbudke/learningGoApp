@@ -76,7 +76,7 @@ getOperation:
 			var circle a.Circle
 			var area = stringToFloat64(circle)
 			fmt.Print("Result: ")
-			fmt.Println(a.Circle(circle.radius))
+			fmt.Println(a.Circle(circle.Length))
 		case "square":
 			var square a.Square
 			var area = stringToFloat64(square)
