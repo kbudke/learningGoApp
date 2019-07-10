@@ -16,7 +16,6 @@ var (
 )
 
 var _ = Describe("Health", func() {
-	// TODO: implement tests for health endpoint?
 
 	BeforeEach(func() {
 		router := mux.NewRouter().StrictSlash(true)
@@ -30,6 +29,7 @@ var _ = Describe("Health", func() {
 		svr.Close()
 	})
 
+	// TODO: implement tests for health endpoint?
 	It("Returns 200", func() {
 		req, _ := http.NewRequest(http.MethodGet, uri, nil)
 

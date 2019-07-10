@@ -1,6 +1,11 @@
 package area_test
 
-import "fmt"
+import (
+	"fmt"
+
+	. "github.com/onsi/ginkgo"
+	. "github.com/onsi/gomega"
+)
 
 var _ = Describe("Area", func() {
 
@@ -25,22 +30,5 @@ var _ = Describe("Area", func() {
 			})
 		})
 
-		Context("calculating subtraction of (6, 4).", func() {
-			It("Subtraction of 6 and 4 should be -2", func() {
-				Expect(calculator.Sub(num1, num2)).To(Equal((int32(-2))))
-			})
-		})
-
-		Context("calculating multiplication of (6, 4).", func() {
-			It("Multiplication of 6 and 4 should be 24", func() {
-				Expect(calculator.Multi(num1, num2)).To(Equal((int32(24))))
-			})
-		})
-
-		Context("calculating square root of (9).", func() {
-			It("Square root of 9 should be 3.", func() {
-				Expect(calculator.Sqrt(9)).To(Equal((float64(3))))
-			})
-		})
 	})
 })

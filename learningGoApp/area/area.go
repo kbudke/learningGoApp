@@ -26,7 +26,7 @@ type Shape interface {
 }
 
 func info(s Shape) {
-	fmt.Println(s.Area())
+	fmt.Println("area", s.Area())
 }
 
 // func moveToMain(Shape) float64 {
