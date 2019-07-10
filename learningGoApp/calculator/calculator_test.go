@@ -47,6 +47,11 @@ var _ = Describe("Calculator", func() {
 			It("Square root of 9 should be 3.", func() {
 				Expect(calculator.Sqrt(9)).To(Equal((float64(3))))
 			})
+
+		Context("calculating something new", func() {
+			It("Will do something.", func() {
+				Expect(calculator.New).To(Equal(float64))
+			})
 		})
-	})
+	)
 })
