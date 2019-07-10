@@ -26,5 +26,12 @@ type Shape interface {
 }
 
 func info(s Shape) {
-	fmt.Println(s.Area())
+	fmt.Println("area", s.Area())
 }
+
+// func moveToMain(Shape) float64 {
+// 	if area {
+// 		fmt.Print("Area can help with Calculating the area of the following shapes.")
+// 		fmt.Println(area.Square)
+// 	}
+// }

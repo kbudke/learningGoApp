@@ -5,56 +5,30 @@ import (
 	"os"
 	"strconv"
 
-	tryHSTS "./http"
-	a "./area"
+	// a "./area"
 	"./calculator"
 )
 
+// func GetNums() (num1 string, num2 string) {
+// 	// var num1 string
+// 	fmt.Print("Input the first number: ")
+// 	fmt.Scanln(&num1)
+
+// 	// var num2 string
+// 	fmt.Print("Input the second number: ")
+// 	fmt.Scanln(&num2)
+// 	return num1, num2
+// }
+
 func main() {
-
-	hsts := tryHSTS.serveHTTPS() {
-
-	}
-	
-	func hsts() {
-	if *serveHTTPSFlag {
-		serveHTTPS()
-	} else {
-		serveHTTP()
-	}
-	}
-	//TODO: finish area calculations
-
-	// circ := a.Circle{
-	// 	radius: 12.345,
-	// }
-	// sqr := a.Square{
-	// 	length: 15,
-	// }
-	// info(circ)
-	// info(sqr)
-
-
-	// TODO: set up the first switch for is this a regular math opperation
-	// TODO: or is this to calculate area?
-
-	hours, remainder := Divmod(5566, 3600)
-	minutes, seconds := Divmod(remainder, 60)
-	fmt.Printf("%d:%d:%d", hours, minutes, seconds)
 
 	//getOperation is a label, use labels to define sections within a single func or multi func
 	//we use as a checkpoint under main, to choose an operation.
+
 getOperation:
-	var operation string
-	fmt.Print("Select an operation: +, -, *, / : ")
-	//Scanln is similar to Scan, but stops scanning at a newline and after the final item there must be a newline or EOF.
-	fmt.Scanln(&operation)
-
-	if area {
-		fmt.Print("Area can help with Calculating the area of the following shapes.")
-		fmt.Println(area.Square)
-	}
-
+	var mathOperation string
+	fmt.Print("Please select an operation: +, -, *, / : ")
+	fmt.Scanln(&mathOperation)
 	var num1 string
 	fmt.Print("Input the first number: ")
 	fmt.Scanln(&num1)
@@ -63,7 +37,10 @@ getOperation:
 	fmt.Print("Input the second number: ")
 	fmt.Scanln(&num2)
 
-	switch operation {
+	// var mathOperation string
+	// var operation string
+
+	switch mathOperation {
 	case "+":
 		var firstNumber int = stringToInt(num1)
 		var secondNumber int = stringToInt(num2)
@@ -74,36 +51,71 @@ getOperation:
 		var secondNumber int = stringToInt(num2)
 		fmt.Print("Result: ")
 		fmt.Println(calculator.Subtract(firstNumber, secondNumber))
-
 	case "*":
 		var firstNumber float64 = stringToFloat64(num1)
 		var secondNumber float64 = stringToFloat64(num2)
 		fmt.Print("Result: ")
 		fmt.Println(calculator.Multiply(firstNumber, secondNumber))
-
 	case "/":
 		var firstNumber float64 = stringToFloat64(num1)
 		var secondNumber float64 = stringToFloat64(num2)
 		fmt.Print("Result: ")
 		fmt.Println(calculator.Divide(firstNumber, secondNumber))
 
-	case "circle":
-		var radius float64
-		fmt.Print("Result: ")
-		fmt.Println(a.Circle(radius))
-
-	case "square":
-		var length float64
-
-		fmt.Print("Result: ")
-		fmt.Println(a.Square(length))
-
 	default:
 		fmt.Println("Invalid operation selected. Please try again!")
 		//The goto in this case saves us from introducing another (boolean) variable used just for control-flow, checked for at the end. In this case, the goto statement makes the code actually better to read and easier follow
 		goto getOperation
 	}
+	// case areaOperation:
+	// 	switch areaOperation {
+	// 	case "circle":
+	// 		var radius float64
+	// 		var area float64 = stringToFloat64(Circle)
+	// 		fmt.Print("Result: ")
+	// 		fmt.Println(a.Circle(Circle.radius))
+	// 	case "square":
+	// 		var area float64 = stringToFloat64(Square)
+	// 		var length float64
+
+	// 		fmt.Print("Result: ")
+	// 		fmt.Println(a.Square(length))
+
+	// 	}
+	// fmt.Print("Select the shape you want area Calculated: Circle, Square : ")
+	// fmt.Scanln(&calculatorOperation)
+	// var circle float64
+	// fmt.Print("Input the Radius of the circle: ")
+	// fmt.Scanln(&radius)
+	// var square float64
+	// fmt.Print("Input a Length of the square: ")
+	// smt.Scanln(&length)
+
 }
+
+// TODO test security headers
+// hsts := tryHSTS.serveHTTPS() {
+
+// }
+
+// func hsts() {
+// if *serveHTTPSFlag {
+// 	serveHTTPS()
+// } else {
+// 	serveHTTP()
+// }
+// }
+
+//TODO: finish area calculations
+
+// circ := a.Circle{
+// 	radius: 12.345,
+// }
+// sqr := a.Square{
+// 	length: 15,
+// }
+// info(circ)
+// info(sqr)
 
 func stringToInt(str string) int {
 	i, err := strconv.Atoi(str)
