@@ -22,12 +22,8 @@ getOperation:
 	case "Arithmetic", "arithmetic", "+", "-", "*", "/":
 		fmt.Println("Arithmetic it is!")
 		fmt.Scanln(&operation)
-
-	case "Geometry", "geometry", "Area", "area":
-		fmt.Println("Area it is!")
-		fmt.Scanln(&operation)
-
 		var arithmetic string
+
 		fmt.Print("Please select an operation: +, -, *, / : ")
 		fmt.Scanln(&arithmetic)
 		var num1 string
@@ -37,9 +33,6 @@ getOperation:
 		var num2 string
 		fmt.Print("Input the second number: ")
 		fmt.Scanln(&num2)
-
-		// var mathOperation string
-		// var operation string
 
 		switch arithmetic {
 		case "+":
@@ -69,6 +62,9 @@ getOperation:
 			goto getOperation
 		}
 
+	case "Geometry", "geometry", "Area", "area":
+		fmt.Println("Area it is!")
+		fmt.Scanln(&operation)
 		var geometry string
 		switch geometry {
 		case "circle":
@@ -97,6 +93,9 @@ getOperation:
 			//The goto in this case saves us from introducing another (boolean) variable used just for control-flow, checked for at the end. In this case, the goto statement makes the code actually better to read and easier follow
 			goto getOperation
 		}
+
+		// var mathOperation string
+		// var operation string
 	}
 }
 
