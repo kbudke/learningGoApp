@@ -6,19 +6,19 @@ import (
 )
 
 type Square struct {
-	length float64
+	Length float64
 }
 
 type Circle struct {
-	radius float64
+	Radius float64
 }
 
 func (s Square) Area() float64 {
-	return s.length * s.length
+	return s.Length * s.Length
 }
 
 func (c Circle) Area() float64 {
-	return math.Pi * c.radius * c.radius
+	return math.Pi * c.Radius * c.Radius
 }
 
 type Shape interface {
