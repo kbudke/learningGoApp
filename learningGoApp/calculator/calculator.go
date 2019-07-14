@@ -5,9 +5,9 @@ import (
 	"math"
 	"os"
 	"strconv"
-	"strings"
 )
 
+//MATH Functions
 func Add(num1, num2 int) int {
 	return num1 + num2
 }
@@ -39,6 +39,12 @@ func Sqrt(num float64) float64 {
 	return math.Sqrt(num)
 }
 
+// HELPER Functions
+func isNumeric(s string) bool {
+	_, err := strconv.ParseFloat(s, 64)
+	return err == nil
+}
+
 func stringToInt(str string) int {
 	i, err := strconv.Atoi(str)
 	if err != nil {
@@ -60,91 +66,110 @@ func stringToFloat64(str string) float64 {
 func float64ToString(float float64) string {
 	return fmt.Sprintf("%f", float)
 }
-func calculateExpression(expr []string) float64 {
-	var solution float64
-	// remainingExpr := append(expr)
-evaluateMore:
-	for i := 0; i < len(expr); i++ {
-		switch expr[i] {
-		case "+":
-			var calculation = stringToFloat64(expr[i-1]) + stringToFloat64(expr[i+1])
-			ans := []string{float64ToString(calculation)}
-			expr = append(ans, expr[i+2:]...)
-			goto evaluateMore
-		case "-":
 
-		case "*":
+func splitStringByCharacter(str string) []string {
+	strArray := []string{}
+	var multiCharValue string
+	index := 0
+	for _, char := range str {
+		if isNumeric(string(char)) && ((index + 1) != len(str)) && isNumeric(string(str[index+1])) {
+			multiCharValue += string(char)
+		} else if isNumeric(string(char)) && ((index + 1) != len(str)) && !isNumeric(string(str[index+1])) {
+			multiCharValue += string(char)
+			strArray = append(strArray, string(multiCharValue))
+			multiCharValue = ""
+		} else {
+			strArray = append(strArray, string(char))
+		}
+		index++
+	}
+	return strArray
+}
 
-		case "=":
-			solution = stringToFloat64(expr[i-1])
+func contains(a []string, x string) int {
+	var index int
+	for i, n := range a {
+		if x == n {
+			index = i
+			break //not greedy will return after first occurence found
+		} else {
+			index = -1
 		}
 
+	}
+	return index
+}
+
+func evaluateExpression(expr []string) []string {
+	for {
+		fmt.Println("evaluate expr ", expr)
+		if len(expr) >= 3 {
+			subExpr := expr[0:3]
+			subSolution := evaluate(subExpr)
+			subSolutionStr := float64ToString(subSolution)
+			//update the expr array
+			subExprSolution := []string{subSolutionStr}
+			suffix := expr[3:]
+
+			expr = append(subExprSolution, suffix...)
+		} else {
+			break
+		}
+	}
+	return expr
+}
+
+func evaluate(expr []string) float64 {
+	var solution float64
+	switch expr[1] {
+	case "+":
+		solution = stringToFloat64(expr[0]) + stringToFloat64(expr[2])
+	case "-":
+		solution = stringToFloat64(expr[0]) - stringToFloat64(expr[2])
+	case "*":
+		solution = stringToFloat64(expr[0]) * stringToFloat64(expr[2])
+	}
+	return solution
+}
+
+func calculateExpression(expr []string) float64 {
+	var solution float64
+
+	for {
+		//search for operators following PEMDAS precedences
+		if openParenthesisIndex := contains(expr, "("); openParenthesisIndex != -1 {
+			closeParentheisIndex := contains(expr, ")")
+			subExpr := expr[(openParenthesisIndex + 1):(closeParentheisIndex)]
+			subExpr = evaluateExpression(subExpr)
+			//reset the expr array; replace (expr) with solution
+			prefixAndSubExprSolution := append(expr[0:openParenthesisIndex], subExpr[0])
+			suffix := expr[(closeParentheisIndex + 1):]
+			expr = append(prefixAndSubExprSolution, suffix...)
+		} else { //addition or subtraction
+			expr = evaluateExpression(expr)
+		}
+		if len(expr) == 1 {
+			solution = stringToFloat64(expr[0])
+			break
+		}
 	}
 	return solution
 }
 
 //ArithmeticCalculator main controller
 func ArithmeticCalculator(arithmetic string) {
-	executionArray := []string{}
-getOperation:
-	// var arithmetic string
-	// fmt.Print("Please select an operation: +, -, *, / : ")
-	// fmt.Scanln(&arithmetic)
+	var input string
 
 	for {
+		fmt.Println("Enter the expression on a single line. NO SPACES. NO EQUALS SIGN")
+		fmt.Println("Available inputs: [ 0-9 ( ) + - * ]")
 		// TODO: can we note the thought process of anything random set up and or why we went with it..
-		var input string
 		fmt.Scanln(&input)
-		if input != "=" {
-			executionArray = append(executionArray, input)
-		} else {
-			executionArray = append(executionArray, input)
-			solution := calculateExpression(executionArray)
-			fmt.Println(strings.Join(executionArray, " "), solution)
-		}
-		// fmt.Println(executionArray)
-		// var num1 string
-		// fmt.Print("Input the first number: ")
-		// fmt.Scanln(&num1)
+		solution := calculateExpression(splitStringByCharacter(input))
+		fmt.Println()
+		fmt.Println(input, "= ", solution)
+		fmt.Println()
 
-		// var num2 string
-		// fmt.Print("Input the second number: ")
-		// fmt.Scanln(&num2)
-
-		// switch input {
-		// case "+":
-		// 	var firstNumber = stringToInt(num1)
-		// 	var secondNumber = stringToInt(num2)
-		// 	fmt.Print("Result: ")
-		// 	fmt.Println(Add(firstNumber, secondNumber))
-		// case "-":
-		// 	var firstNumber = stringToInt(num1)
-		// 	var secondNumber = stringToInt(num2)
-		// 	fmt.Print("Result: ")
-		// 	fmt.Println(Subtract(firstNumber, secondNumber))
-		// case "*":
-		// 	var firstNumber = stringToFloat64(num1)
-		// 	var secondNumber = stringToFloat64(num2)
-		// 	fmt.Print("Result: ")
-		// 	fmt.Println(Multiply(firstNumber, secondNumber))
-		// case "/":
-		// 	var firstNumber = stringToFloat64(num1)
-		// 	var secondNumber = stringToFloat64(num2)
-		// 	fmt.Print("Result: ")
-		// 	fmt.Println(Divide(firstNumber, secondNumber))
-		// // case "back":
-		// // 	return
-		// case "=":
-
-		// default:
-		// 	fmt.Println("Invalid operation selected. Please try again!")
-		// 	//The goto in this case saves us from introducing another (boolean) variable used just for control-flow, checked for at the end. In this case, the goto statement makes the code actually better to read and easier follow
-		// 	goto getOperation
-		// }
-
-		// fmt.Print("Please select an operation: +, -, *, / : ")
-		// fmt.Scanln(&arithmetic)
-		goto getOperation
 	}
 
 }
