@@ -72,7 +72,11 @@ func splitStringByCharacter(str string) []string {
 	var multiCharValue string
 	index := 0
 	for _, char := range str {
-		if isNumeric(string(char)) && ((index + 1) != len(str)) && isNumeric(string(str[index+1])) {
+		if string(char) == "-" && (index-1) == -1 {
+			multiCharValue += string(char)
+		} else if string(char) == "-" && !isNumeric(string(str[index-1])) && string(str[index-1]) != ")" {
+			multiCharValue += string(char)
+		} else if isNumeric(string(char)) && ((index + 1) != len(str)) && isNumeric(string(str[index+1])) {
 			multiCharValue += string(char)
 		} else if isNumeric(string(char)) && ((index + 1) != len(str)) && !isNumeric(string(str[index+1])) {
 			multiCharValue += string(char)
@@ -123,17 +127,35 @@ func evaluateExpression(expr []string) []string {
 func evaluate(expr []string) float64 {
 	var solution float64
 	switch expr[1] {
+	case "^":
+		solution = stringToFloat64(expr[0])
+		fmt.Println(solution)
+		for i := 1; i < stringToInt(expr[2]); i++ {
+			solution = solution * stringToFloat64(expr[0])
+			fmt.Println(solution)
+		}
+		fmt.Println(solution)
+	case "*":
+		solution = stringToFloat64(expr[0]) * stringToFloat64(expr[2])
+	case "/":
+		solution = stringToFloat64(expr[0]) / stringToFloat64(expr[2])
 	case "+":
 		solution = stringToFloat64(expr[0]) + stringToFloat64(expr[2])
 	case "-":
 		solution = stringToFloat64(expr[0]) - stringToFloat64(expr[2])
-	case "*":
-		solution = stringToFloat64(expr[0]) * stringToFloat64(expr[2])
 	}
 	return solution
 }
 
-func calculateExpression(expr []string) float64 {
+func resetExpressionArray(indexBeforeOperator int, indexAfterOperator int, expr []string, subExprSolution string) []string {
+	prefixAndSubExprSolution := append(expr[0:indexBeforeOperator], subExprSolution)
+	suffix := expr[(indexAfterOperator):]
+	expr = append(prefixAndSubExprSolution, suffix...)
+
+	return expr
+}
+
+func parseExpression(expr []string) float64 {
 	var solution float64
 
 	for {
@@ -141,11 +163,16 @@ func calculateExpression(expr []string) float64 {
 		if openParenthesisIndex := contains(expr, "("); openParenthesisIndex != -1 {
 			closeParentheisIndex := contains(expr, ")")
 			subExpr := expr[(openParenthesisIndex + 1):(closeParentheisIndex)]
-			subExprSolution := evaluateExpression(subExpr)
-			//reset the expr array; replace (expr) with solution
-			prefixAndSubExprSolution := append(expr[0:openParenthesisIndex], subExprSolution[0])
-			suffix := expr[(closeParentheisIndex + 1):]
-			expr = append(prefixAndSubExprSolution, suffix...)
+			expr = resetExpressionArray(openParenthesisIndex, closeParentheisIndex+1, expr, evaluateExpression(subExpr)[0])
+		} else if exponentIndex := contains(expr, "^"); exponentIndex != -1 {
+			subExpr := expr[(exponentIndex - 1) : (exponentIndex)+2]
+			expr = resetExpressionArray(exponentIndex-1, exponentIndex+2, expr, evaluateExpression(subExpr)[0])
+		} else if multiIndex := contains(expr, "*"); multiIndex != -1 {
+			subExpr := expr[(multiIndex - 1) : (multiIndex)+2]
+			expr = resetExpressionArray(multiIndex-1, multiIndex+2, expr, evaluateExpression(subExpr)[0])
+		} else if divisionIndex := contains(expr, "/"); divisionIndex != -1 {
+			subExpr := expr[(divisionIndex - 1) : (divisionIndex)+2]
+			expr = resetExpressionArray(divisionIndex-1, divisionIndex+2, expr, evaluateExpression(subExpr)[0])
 		} else { //addition or subtraction
 			expr = evaluateExpression(expr)
 		}
@@ -166,7 +193,10 @@ func ArithmeticCalculator() {
 		fmt.Println("Available inputs: [ 0-9 ( ) + - * ]")
 		fmt.Print("User input: ")
 		fmt.Scanln(&input)
-		solution := calculateExpression(splitStringByCharacter(input))
-		fmt.Println("\n", "Solution: ", input, "= ", solution, "\n")
+		solution := parseExpression(splitStringByCharacter(input))
+		fmt.Println()
+		fmt.Println(input, "= ", solution)
+		fmt.Println()
+
 	}
 }
