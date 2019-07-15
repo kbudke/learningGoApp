@@ -145,14 +145,14 @@ func evaluate(expr []string) float64 {
 	switch expr[1] {
 	case "^":
 		solution = stringToFloat64(expr[0])
-		exp := stringToInt(expr[2])
-		if stringToInt(expr[2]) < 0 {
+		exp := stringToFloat64(expr[2])
+		if stringToFloat64(expr[2]) < 0 {
 			exp = -exp
 		}
-		for i := 1; i < exp; i++ {
+		for i := 1.0; i < exp; i++ {
 			solution = solution * stringToFloat64(expr[0])
 		}
-		if stringToInt(expr[2]) < 0 {
+		if stringToFloat64(expr[2]) < 0 {
 			solution = 1 / solution
 		}
 	case "*":
