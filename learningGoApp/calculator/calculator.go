@@ -102,8 +102,9 @@ func contains(a []string, x string) int {
 
 func evaluateExpression(expr []string) []string {
 	for {
-		fmt.Println("evaluate expr ", expr)
+		fmt.Println("\tEvaluate Expression ", expr)
 		if len(expr) >= 3 {
+			//[low:high] Just means upto but not includding (high)
 			subExpr := expr[0:3]
 			subSolution := evaluate(subExpr)
 			subSolutionStr := float64ToString(subSolution)
@@ -140,9 +141,9 @@ func calculateExpression(expr []string) float64 {
 		if openParenthesisIndex := contains(expr, "("); openParenthesisIndex != -1 {
 			closeParentheisIndex := contains(expr, ")")
 			subExpr := expr[(openParenthesisIndex + 1):(closeParentheisIndex)]
-			subExpr = evaluateExpression(subExpr)
+			subExprSolution := evaluateExpression(subExpr)
 			//reset the expr array; replace (expr) with solution
-			prefixAndSubExprSolution := append(expr[0:openParenthesisIndex], subExpr[0])
+			prefixAndSubExprSolution := append(expr[0:openParenthesisIndex], subExprSolution[0])
 			suffix := expr[(closeParentheisIndex + 1):]
 			expr = append(prefixAndSubExprSolution, suffix...)
 		} else { //addition or subtraction
@@ -157,19 +158,15 @@ func calculateExpression(expr []string) float64 {
 }
 
 //ArithmeticCalculator main controller
-func ArithmeticCalculator(arithmetic string) {
+func ArithmeticCalculator() {
 	var input string
 
 	for {
 		fmt.Println("Enter the expression on a single line. NO SPACES. NO EQUALS SIGN")
 		fmt.Println("Available inputs: [ 0-9 ( ) + - * ]")
-		// TODO: can we note the thought process of anything random set up and or why we went with it..
+		fmt.Print("User input: ")
 		fmt.Scanln(&input)
 		solution := calculateExpression(splitStringByCharacter(input))
-		fmt.Println()
-		fmt.Println(input, "= ", solution)
-		fmt.Println()
-
+		fmt.Println("\n", "Solution: ", input, "= ", solution, "\n")
 	}
-
 }

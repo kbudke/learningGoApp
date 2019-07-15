@@ -14,14 +14,14 @@ func main() {
 	//we use as a checkpoint under main, to choose an operation.
 getOperation:
 	var operation string
-	fmt.Println("Do you want Arithmetic(+, -, *, /) or Geometry(Area of shapes)?")
+	fmt.Println("Do you want Arithmetic or Geometry?")
 	fmt.Scanln(&operation)
 	operation = strings.ToLower(operation)
 	fmt.Println("you entered ", operation)
 	switch *&operation {
 	case "arithmetic", "+", "-", "*", "/":
 		fmt.Println("Arithmetic it is!")
-		calculator.ArithmeticCalculator(operation)
+		calculator.ArithmeticCalculator()
 		goto getOperation
 	case "geometry", "area", "shape":
 		fmt.Println("Area it is!")
