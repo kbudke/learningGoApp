@@ -90,16 +90,28 @@ func splitStringByCharacter(str string) []string {
 	return strArray
 }
 
-func contains(a []string, x string) int {
+func contains(expr []string, charToFind string) int {
 	var index int
-	for i, n := range a {
-		if x == n {
-			index = i
-			break //not greedy will return after first occurence found
-		} else {
-			index = -1
+	if charToFind == "(" {
+		//loop through expr backward when searching for opening parenthesis
+		//this is to capture innermost parenthesis in case of nested parentheses
+		for i := len(expr) - 1; i >= 0; i-- {
+			if charToFind == expr[i] {
+				index = i
+				break
+			} else {
+				index = -1
+			}
 		}
-
+	} else {
+		for exprIndex, exprValue := range expr {
+			if charToFind == exprValue {
+				index = exprIndex
+				break //not greedy will return after first occurence found
+			} else {
+				index = -1
+			}
+		}
 	}
 	return index
 }
