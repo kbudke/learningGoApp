@@ -5,6 +5,7 @@ import (
 	"math"
 	"os"
 	"strconv"
+	"strings"
 )
 
 //MATH Functions
@@ -213,6 +214,9 @@ func ArithmeticCalculator() {
 		fmt.Println("Available inputs: [ 0-9 ( ) + - * ]")
 		fmt.Print("User input: ")
 		fmt.Scanln(&input)
+		if strings.ToLower(input) == "exit" {
+			break
+		}
 		solution := parseExpression(splitStringByCharacter(input))
 		fmt.Println("\n", input, "= ", solution, "\n")
 	}

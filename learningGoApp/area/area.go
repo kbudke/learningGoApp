@@ -91,7 +91,7 @@ func GeometryCalculator() {
 setShape:
 	fmt.Println("Choose the shape you want the area of (Circle or Square) ")
 	fmt.Scanln(&operation)
-	fmt.Println("you entered %s", operation)
+	fmt.Println("you entered", operation)
 getOperation:
 	switch *&operation {
 	case "circle":
@@ -112,8 +112,8 @@ getOperation:
 		fmt.Println("Input a Length & Width of the rectangle: ")
 		fmt.Scanln(&rectangle.length)
 		fmt.Println(rectangle.Area())
-	case "back":
-		break
+	case "exit":
+		return
 	default:
 		fmt.Println("Invalid operation selected. Please try again!")
 		//The goto in this case saves us from introducing another (boolean) variable used just for control-flow, checked for at the end. In this case, the goto statement makes the code actually better to read and easier follow
