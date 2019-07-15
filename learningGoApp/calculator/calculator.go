@@ -82,6 +82,10 @@ func splitStringByCharacter(str string) []string {
 			multiCharValue += string(char)
 			strArray = append(strArray, string(multiCharValue))
 			multiCharValue = ""
+		} else if isNumeric(string(char)) && ((index + 1) == len(str)) {
+			multiCharValue += string(char)
+			strArray = append(strArray, string(multiCharValue))
+			multiCharValue = ""
 		} else {
 			strArray = append(strArray, string(char))
 		}
@@ -141,12 +145,16 @@ func evaluate(expr []string) float64 {
 	switch expr[1] {
 	case "^":
 		solution = stringToFloat64(expr[0])
-		fmt.Println(solution)
-		for i := 1; i < stringToInt(expr[2]); i++ {
-			solution = solution * stringToFloat64(expr[0])
-			fmt.Println(solution)
+		exp := stringToInt(expr[2])
+		if stringToInt(expr[2]) < 0 {
+			exp = -exp
 		}
-		fmt.Println(solution)
+		for i := 1; i < exp; i++ {
+			solution = solution * stringToFloat64(expr[0])
+		}
+		if stringToInt(expr[2]) < 0 {
+			solution = 1 / solution
+		}
 	case "*":
 		solution = stringToFloat64(expr[0]) * stringToFloat64(expr[2])
 	case "/":
@@ -206,9 +214,6 @@ func ArithmeticCalculator() {
 		fmt.Print("User input: ")
 		fmt.Scanln(&input)
 		solution := parseExpression(splitStringByCharacter(input))
-		fmt.Println()
-		fmt.Println(input, "= ", solution)
-		fmt.Println()
-
+		fmt.Println("\n", input, "= ", solution, "\n")
 	}
 }

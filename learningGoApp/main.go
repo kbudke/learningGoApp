@@ -17,7 +17,6 @@ getOperation:
 	fmt.Println("Do you want Arithmetic or Geometry?")
 	fmt.Scanln(&operation)
 	operation = strings.ToLower(operation)
-	fmt.Println("you entered ", operation)
 	switch *&operation {
 	case "arithmetic", "+", "-", "*", "/":
 		fmt.Println("Arithmetic it is!")
