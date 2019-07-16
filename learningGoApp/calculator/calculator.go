@@ -1,6 +1,7 @@
 package calculator
 
 import (
+	"bufio"
 	"fmt"
 	"math"
 	"os"
@@ -207,17 +208,13 @@ func parseExpression(expr []string) float64 {
 
 //ArithmeticCalculator main controller
 func ArithmeticCalculator() {
-	var input string
-
+	scanner := bufio.NewScanner(os.Stdin)
 	for {
-		fmt.Println("Enter the expression on a single line. NO SPACES. NO EQUALS SIGN")
+		fmt.Println("Enter expression. NO EQUALS SIGN.")
 		fmt.Println("Available inputs: [ 0-9 ( ) + - * ]")
 		fmt.Print("User input: ")
-		fmt.Scanln(&input)
-		if strings.ToLower(input) == "exit" {
-			break
-		}
-		solution := parseExpression(splitStringByCharacter(input))
-		fmt.Println("\n", input, "= ", solution, "\n")
+		scanner.Scan()
+		solution := parseExpression(splitStringByCharacter(strings.Replace(scanner.Text(), " ", "", -1)))
+		fmt.Println("\n", scanner.Text(), "= ", solution, "\n")
 	}
 }
