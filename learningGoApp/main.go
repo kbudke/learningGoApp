@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	"./area"
-	"./calculator"
+	"practice/goPractice/learningGoApp/learningGoApp/area"
+	"practice/goPractice/learningGoApp/learningGoApp/calculator"
 )
 
 func main() {

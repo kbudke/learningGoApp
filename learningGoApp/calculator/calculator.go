@@ -20,7 +20,7 @@ func Subtract(num1, num2 int) int {
 }
 
 //Multiply is
-func Multiply(num1, num2 float64) float64 {
+func Multiply(num1, num2 int) int {
 	return num1 * num2
 }
 
@@ -215,6 +215,6 @@ func ArithmeticCalculator() {
 		fmt.Print("User input: ")
 		scanner.Scan()
 		solution := parseExpression(splitStringByCharacter(strings.Replace(scanner.Text(), " ", "", -1)))
-		fmt.Println("\n", scanner.Text(), "= ", solution, "\n")
+		fmt.Println("\n", scanner.Text(), "= ", solution)
 	}
 }

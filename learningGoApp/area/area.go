@@ -57,8 +57,10 @@ func NewRectangle() Shape {
 }
 
 //NewSquare something
-func NewCircle() Shape {
-	return &circle{}
+func NewCircle(radius float64) Shape {
+	var circle circle
+	circle.radius = radius
+	return &circle
 }
 
 //NewSquare something
@@ -82,7 +84,7 @@ type Shape interface {
 }
 
 func info(s Shape) {
-	fmt.Println("area", s.Area)
+	fmt.Println("area", s.Area())
 }
 
 //GeometryCalculator main controller
