@@ -69,7 +69,7 @@ func float64ToString(float float64) string {
 	return fmt.Sprintf("%f", float)
 }
 
-func splitStringByCharacter(str string) []string {
+func SplitStringByCharacter(str string) []string {
 	strArray := []string{}
 	var multiCharValue string
 	index := 0
@@ -214,7 +214,7 @@ func ArithmeticCalculator() {
 		fmt.Println("Available inputs: [ 0-9 ( ) + - * ]")
 		fmt.Print("User input: ")
 		scanner.Scan()
-		solution := parseExpression(splitStringByCharacter(strings.Replace(scanner.Text(), " ", "", -1)))
+		solution := parseExpression(SplitStringByCharacter(strings.Replace(scanner.Text(), " ", "", -1)))
 		fmt.Println("\n", scanner.Text(), "= ", solution)
 	}
 }

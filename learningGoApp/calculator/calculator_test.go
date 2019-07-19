@@ -49,5 +49,14 @@ var _ = Describe("Calculator", func() {
 			Expect(Sqrt(9)).To(Equal((float64(3))))
 		})
 	})
+	Context("split string by character", func() {
+		It("seperate characters properly", func() {
+			expr := "-25+(1+20)"
+			splitExpr := SplitStringByCharacter(expr)
+			Expect(splitExpr[0]).To(Equal("-25"))
+			Expect(splitExpr[1]).To(Equal("+"))
+			Expect(splitExpr[5]).To(Equal("20"))
+		})
+	})
 
 })
