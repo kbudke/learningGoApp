@@ -1,7 +1,7 @@
 mode: atomic
-practice/goPractice/learningGoApp/learningGoApp/calculator/calculator.go:13.30,15.2 1 1
-practice/goPractice/learningGoApp/learningGoApp/calculator/calculator.go:18.35,20.2 1 1
-practice/goPractice/learningGoApp/learningGoApp/calculator/calculator.go:23.35,25.2 1 1
+practice/goPractice/learningGoApp/learningGoApp/calculator/calculator.go:13.38,15.2 1 1
+practice/goPractice/learningGoApp/learningGoApp/calculator/calculator.go:18.43,20.2 1 1
+practice/goPractice/learningGoApp/learningGoApp/calculator/calculator.go:23.43,25.2 1 1
 practice/goPractice/learningGoApp/learningGoApp/calculator/calculator.go:28.41,30.2 1 0
 practice/goPractice/learningGoApp/learningGoApp/calculator/calculator.go:33.71,37.2 3 0
 practice/goPractice/learningGoApp/learningGoApp/calculator/calculator.go:40.32,42.2 1 1
@@ -47,10 +47,10 @@ practice/goPractice/learningGoApp/learningGoApp/calculator/calculator.go:169.2,1
 practice/goPractice/learningGoApp/learningGoApp/calculator/calculator.go:148.11,151.35 3 0
 practice/goPractice/learningGoApp/learningGoApp/calculator/calculator.go:154.3,154.30 1 0
 practice/goPractice/learningGoApp/learningGoApp/calculator/calculator.go:157.3,157.35 1 0
-practice/goPractice/learningGoApp/learningGoApp/calculator/calculator.go:160.11,161.65 1 0
-practice/goPractice/learningGoApp/learningGoApp/calculator/calculator.go:162.11,163.65 1 0
-practice/goPractice/learningGoApp/learningGoApp/calculator/calculator.go:164.11,165.65 1 0
-practice/goPractice/learningGoApp/learningGoApp/calculator/calculator.go:166.11,167.65 1 0
+practice/goPractice/learningGoApp/learningGoApp/calculator/calculator.go:160.11,161.74 1 0
+practice/goPractice/learningGoApp/learningGoApp/calculator/calculator.go:162.11,163.72 1 0
+practice/goPractice/learningGoApp/learningGoApp/calculator/calculator.go:164.11,165.69 1 0
+practice/goPractice/learningGoApp/learningGoApp/calculator/calculator.go:166.11,167.74 1 0
 practice/goPractice/learningGoApp/learningGoApp/calculator/calculator.go:151.35,153.4 1 0
 practice/goPractice/learningGoApp/learningGoApp/calculator/calculator.go:154.30,156.4 1 0
 practice/goPractice/learningGoApp/learningGoApp/calculator/calculator.go:157.35,159.4 1 0

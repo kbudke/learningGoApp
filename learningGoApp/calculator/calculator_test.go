@@ -12,7 +12,7 @@ import (
 var _ = Describe("Calculator", func() {
 
 	var (
-		num1, num2 int
+		num1, num2 float64
 	)
 
 	BeforeEach(func() {
@@ -26,31 +26,31 @@ var _ = Describe("Calculator", func() {
 	})
 
 	// Describe("Testing ", func() {
-	Context("calculating sum of (6, 4).", func() {
-		It("Sum of 6 and 4 should be 10", func() {
-			Expect(Add(num1, num2)).To(Equal(10))
+	Context("calculating sum of (6,4).", func() {
+		It("should return 10.0", func() {
+			Expect(Add(num1, num2)).To(Equal(10.0))
 		})
 	})
 
-	Context("calculating subtraction of (6, 4).", func() {
-		It("Subtraction of 6 and 4 should be -2", func() {
-			Expect(Subtract(num1, num2)).To(Equal(2))
+	Context("calculating subtraction of (4,6).", func() {
+		It("should return -2.0", func() {
+			Expect(Subtract(num2, num1)).To(Equal(-2.0))
 		})
 	})
 
 	Context("calculating multiplication of (6, 4).", func() {
-		It("Multiplication of 6 and 4 should be 24", func() {
-			Expect(Multiply(num1, num2)).To(Equal(24))
+		It("should return 24.0", func() {
+			Expect(Multiply(num1, num2)).To(Equal(24.0))
 		})
 	})
 
 	Context("calculating square root of (9).", func() {
-		It("Square root of 9 should be 3.", func() {
-			Expect(Sqrt(9)).To(Equal((float64(3))))
+		It("should return 3.0", func() {
+			Expect(Sqrt(9)).To(Equal((3.0)))
 		})
 	})
 	Context("split string by character", func() {
-		It("seperate characters properly", func() {
+		It("should seperate characters properly", func() {
 			expr := "-25+(1+20)"
 			splitExpr := SplitStringByCharacter(expr)
 			Expect(splitExpr[0]).To(Equal("-25"))

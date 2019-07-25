@@ -10,17 +10,17 @@ import (
 )
 
 //MATH Functions
-func Add(num1, num2 int) int {
+func Add(num1, num2 float64) float64 {
 	return num1 + num2
 }
 
 //Subtract is
-func Subtract(num1, num2 int) int {
+func Subtract(num1, num2 float64) float64 {
 	return num1 - num2
 }
 
 //Multiply is
-func Multiply(num1, num2 int) int {
+func Multiply(num1, num2 float64) float64 {
 	return num1 * num2
 }
 
@@ -158,13 +158,13 @@ func evaluate(expr []string) float64 {
 			solution = 1 / solution
 		}
 	case "*":
-		solution = stringToFloat64(expr[0]) * stringToFloat64(expr[2])
+		solution = Multiply(stringToFloat64(expr[0]), stringToFloat64(expr[2]))
 	case "/":
-		solution = stringToFloat64(expr[0]) / stringToFloat64(expr[2])
+		solution = Divide(stringToFloat64(expr[0]), stringToFloat64(expr[2]))
 	case "+":
-		solution = stringToFloat64(expr[0]) + stringToFloat64(expr[2])
+		solution = Add(stringToFloat64(expr[0]), stringToFloat64(expr[2]))
 	case "-":
-		solution = stringToFloat64(expr[0]) - stringToFloat64(expr[2])
+		solution = Subtract(stringToFloat64(expr[0]), stringToFloat64(expr[2]))
 	}
 	return solution
 }
@@ -179,7 +179,7 @@ func resetExpressionArray(indexBeforeOperator int, indexAfterOperator int, expr 
 
 func parseExpression(expr []string) float64 {
 	var solution float64
-
+	//TODO: add support sqrt and divmoid input
 	for {
 		//search for operators following PEMDAS precedences
 		if openParenthesisIndex := contains(expr, "("); openParenthesisIndex != -1 {
